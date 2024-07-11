@@ -1,0 +1,6 @@
+@ClientManagementAPI_NancyFx_SQLite_HostAddress = http://localhost:5193
+
+GET {{ClientManagementAPI_NancyFx_SQLite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
