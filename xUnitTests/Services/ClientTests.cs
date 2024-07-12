@@ -230,6 +230,5 @@ namespace xUnitTests.Services
             await actual.Should().ThrowAsync<NotFoundException>()
                 .WithMessage("No history found");
         }
-
     }
 }

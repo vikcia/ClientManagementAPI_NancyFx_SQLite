@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces;
 using Domain.Dtos;
-using Domain.Entities;
 
 namespace ClientManagementAPI_NancyFx_SQLite.Controllers;
 
