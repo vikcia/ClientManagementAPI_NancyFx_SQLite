@@ -61,8 +61,10 @@ public class ClientService : IClientService
         {
             _logger.Information("Getting clients...");
 
-            IEnumerable<ClientEntity> clients = await _clientRepository.GetAsync()
-                ?? throw new NotFoundException($"Client not found");
+            IEnumerable<ClientEntity> clients = await _clientRepository.GetAsync();
+
+            _ = (clients == null || !clients.Any())
+               ? throw new NotFoundException($"Client not found") : clients;
 
             _logger.Information("Clients retrieved successfully => {@clients}", clients);
 
@@ -158,11 +160,15 @@ public class ClientService : IClientService
         {
             _logger.Information("Deleting client with ID: {Id}", id);
 
-            ClientDto clientDto = await GetByIdAsync(id);
-            if (clientDto == null)
+            ClientEntity clientEntity = await _clientRepository.GetByIdAsync(id)
+                ?? throw new NotFoundException($"No client found to delete with this ID: {id}");
+
+            ClientDto clientDto = new ClientDto
             {
-                throw new NotFoundException($"No client found to delete with this ID: {id}");
-            }
+                Name = clientEntity.Name,
+                Age = clientEntity.Age,
+                Comment = clientEntity.Comment
+            };
 
             bool isDeleted = await _clientRepository.DeleteAsync(id);
             if (!isDeleted)
@@ -172,7 +178,7 @@ public class ClientService : IClientService
 
             await _clientRepository.SaveOperationsAsync(id, Status.ClientDeleted.ToString());
 
-            _logger.Information("Client deleted successfully => {@ClientDto}", clientDto);
+            _logger.Information("Client deleted successfully => {@clientDto}", clientDto);
         }
         catch (NotFoundException ex)
         {
@@ -186,14 +192,17 @@ public class ClientService : IClientService
         }
     }
 
+
     public async Task<IEnumerable<OperationsHistoryEntity>> GetHistoryAsync()
     {
         try
         {
             _logger.Information("Getting history of operations with clients...");
 
-            IEnumerable<OperationsHistoryEntity> history = await _clientRepository.GetHistoryAsync()
-                ?? throw new NotFoundException($"No history found");
+            IEnumerable<OperationsHistoryEntity> history = await _clientRepository.GetHistoryAsync();
+
+            _ = (history == null || !history.Any())
+                ? throw new NotFoundException($"No history found") : history;
 
             _logger.Information("Operations history successfully retrieved => {@history}", history);
 
