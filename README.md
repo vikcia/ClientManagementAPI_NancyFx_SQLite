@@ -22,16 +22,16 @@ Data will be stored in an SQLite database.
    - Viewing the action history for client
 
 2. **Endpoints**
-*Base URL: https://localhost:7029/*
-  *- Create a New Client*
-   Endpoint: POST /client
-   *- Get All Clients*
-   Endpoint: GET /client
-   *- Get a Specific Client*
-   Endpoint: GET /client/{id}
-   *- Update a Specific Client*
-   Endpoint: PUT /client/{id}
-   *-Delete a Client*
-   Endpoint: DELETE /client/{id}
-   *-Get Action History*
-   Endpoint: GET /client/history
+   - Base URL: https://localhost:7029/
+      - Create a New Client
+         - Endpoint: POST /client
+      - Get All Clients
+         - Endpoint: GET /client
+      - Get a Specific Client
+         - Endpoint: GET /client/{id}
+      - Update a Specific Client
+         - Endpoint: PUT /client/{id}
+      - Delete a Client
+         - Endpoint: DELETE /client/{id}
+      - Get Action History
+         - Endpoint: GET /client/history
