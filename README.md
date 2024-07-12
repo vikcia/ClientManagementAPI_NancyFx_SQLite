@@ -34,4 +34,4 @@ Data will be stored in an SQLite database.
       - Delete a Client
          - Endpoint: DELETE /client/{id}
       - Get Action History
-         - Endpoint: GET /client/history
+         - Endpoint: GET /history
